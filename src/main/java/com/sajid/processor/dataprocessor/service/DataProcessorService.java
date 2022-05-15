@@ -32,6 +32,7 @@ public class DataProcessorService {
 			iotEntity.setPulseRate(iotData.getPatientCondition().getPulseRate());
 			iotEntity.setSpO2(iotData.getPatientCondition().getSpO2());
 			iotEntity.setBp(iotData.getPatientCondition().getBloodPressure());
+			iotEntity.setProcessedTime(LocalDateTime.now());
 			return iotEntity;
 		}).collect(Collectors.toList());
 	}

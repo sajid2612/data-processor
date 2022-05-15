@@ -18,7 +18,7 @@ public class FlatFileProcessor implements EventProcessor {
 	static ObjectMapper obm = new ObjectMapper();
 
 	@Override
-	public void consumeEvents(int batchSize) {
+	public void consumeEvents(int batchSize, int sleepTimeInMillis) {
 		String filename = "data-stream.text";
 		String workingDirectory = System.getProperty("user.dir");
 		System.out.println("Processing data...");
@@ -34,7 +34,7 @@ public class FlatFileProcessor implements EventProcessor {
 				raf.seek(position);
 				String str;
 				int capacity = 0;
-				while ((str = raf.readLine()) != null && capacity < 5) {
+				while ((str = raf.readLine()) != null && capacity < batchSize) {
 					IotData iotData = parse(str);
 					dataList.add(iotData);
 					System.out.println(str);
@@ -42,7 +42,7 @@ public class FlatFileProcessor implements EventProcessor {
 					position = raf.getFilePointer();
 				}
 				dataProcessorService.persistData(dataList);
-				Thread.sleep(batchSize);
+				Thread.sleep(sleepTimeInMillis);
 			}
 		} catch (IOException | InterruptedException e) {
 			//TODO(Limitation for now) : Those failed events can be captured in another file, lets say data-process-failed, which can be further processed by same/other system

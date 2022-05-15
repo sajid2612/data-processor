@@ -19,7 +19,7 @@ public class DataProcessorApplication {
 
 	@Bean
 	public CommandLineRunner commandLineRunner() {
-		return args -> eventConsumer.consumeEvents(Integer.parseInt(args[0]));
+		return args -> eventConsumer.consumeEvents(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
 	}
 
 	@Bean(initMethod = "start", destroyMethod = "stop")

@@ -4,5 +4,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface EventProcessor {
-	void consumeEvents(int batchSize);
+	void consumeEvents(int batchSize, int sleepTimeInSec);
 }

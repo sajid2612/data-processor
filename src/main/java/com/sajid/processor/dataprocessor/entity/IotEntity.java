@@ -29,6 +29,9 @@ public class IotEntity {
 	@Column(name = "EVENT_TIME")
 	private LocalDateTime eventTime;
 
+	@Column(name = "PROCESSED_TIME")
+	private LocalDateTime processedTime;
+
 	@Column(name = "SP_O2")
 	private int spO2;
 
